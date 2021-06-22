@@ -54,8 +54,8 @@ const resolvers = {
       await validations.emailExists(info.email, services); // validate email exists
       return services.account.addAccount(info);
     },
-    async login(_, { email, password, asAdmin }, { services }) {
-      const { userId, token } = await services.authentication.login(email, password);
+    async login(_, { email, password }, { services }) {
+      const { token } = await services.authentication.login(email, password);
       const account = await services.account.findByEmail(email);
       return { token, account };
     },

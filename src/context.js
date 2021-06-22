@@ -3,7 +3,7 @@ import 'dotenv/config';
 import { SecretsCache, DbSecrets, JwtSecret } from './helpers/secretsCache';
 import AccountRepository from './domain/account/repository';
 import AccountService from './domain/account/service';
-import AuthenticationService from "./domain/authentication/service";
+import AuthenticationService from './domain/authentication/service';
 
 const createContext = async () => {
   const secretsCache = new SecretsCache();

@@ -8,8 +8,8 @@
     "prod": "node ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec babel-node src/index.js",
-    "lint": "prettier --check '{src}/**/*.js' 'package.json'  && eslint --fix src/*",
-    "format": "prettier --check '{src}/**/*.js' 'package.json' --write"
+    "lint": "prettier --check 'src/**/*.js' 'package.json'  && eslint --fix src/*",
+    "format": "prettier --check 'src/**/*.js' 'package.json' --write"
   },
   "author": "",
   "license": "ISC",

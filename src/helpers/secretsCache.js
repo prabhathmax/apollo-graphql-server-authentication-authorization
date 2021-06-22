@@ -64,14 +64,18 @@ export class SecretsCache {
           SecretId: SECRETS_NAME,
         })
         .promise()
-        .then(res => {
-          const decoded = simpleDecode(res.SecretString, [].concat(DbSecrets.keys(), JwtSecret.keys()));
+        .then((res) => {
+          const decoded = simpleDecode(
+            res.SecretString,
+            [].concat(DbSecrets.keys(), JwtSecret.keys()),
+          );
           ttl = Number(decoded.TTL) || DEFAULT_TTL;
           this.state.ttl = ttl;
 
           return decoded;
         })
-                .catch(err => { //eslint-disable-line
+        .catch(() => {
+          //eslint-disable-line
           const envVars = [...DbSecrets.keys(), ...JwtSecret.keys()];
           throw new Error(`Missing some required env variables \n\t${envVars.join(`\n\t`)}`);
         });
@@ -98,7 +102,7 @@ export class DbSecrets {
 
   // Returns `{ host: string, username: string, password: string, database: string }`;
   async get() {
-    const useEnv = DbSecrets.keys().every(key => !!process.env[key]);
+    const useEnv = DbSecrets.keys().every((key) => !!process.env[key]);
 
     const obj = useEnv ? process.env : await this.cache.get();
     return {
@@ -128,6 +132,6 @@ export class JwtSecret {
     if (process.env.JWT_SECRET) {
       return process.env.JWT_SECRET;
     }
-    return this.cache.get().then(secrets => secrets.JWT_SECRET);
+    return this.cache.get().then((secrets) => secrets.JWT_SECRET);
   }
 }

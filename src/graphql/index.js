@@ -11,11 +11,10 @@ const defaultTypeDefs = gql`
   }
 `;
 
-const createSchema = () => {
-  return makeExecutableSchema({
+const createSchema = () =>
+  makeExecutableSchema({
     typeDefs: [defaultTypeDefs, account.typeDefs],
     resolvers: merge({}, account.resolvers),
   });
-};
 
 export default createSchema;

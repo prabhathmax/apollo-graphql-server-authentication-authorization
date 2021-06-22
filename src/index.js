@@ -7,18 +7,16 @@ const port = /^\d+$/.test(process.env.PORT) ? Number(process.env.PORT) : 4000;
   const context = await createContext();
   const server = new ApolloServer({
     schema: createSchema(),
-    context: async () => {
-      return {
-        ...context,
-      };
-    },
+    context: async () => ({
+      ...context,
+    }),
   });
 
   server.listen({ port }, () => {
     /* eslint-disable no-console */
     console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`);
   });
-})().catch(error => {
+})().catch((error) => {
   /* eslint-disable no-console */
   console.log(error);
 });

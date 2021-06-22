@@ -1,11 +1,10 @@
 import bcrypt from 'bcrypt';
 
-const profileForAccount = async (knex, userId) => {
-  return knex('profiles')
+const profileForAccount = async (knex, userId) =>
+  knex('profiles')
     .select(['userId', 'firstName', 'lastName', 'middleName', 'createdAt', 'updatedAt'])
     .where({ userId })
     .first();
-};
 
 class AccountRepository {
   constructor(kenx) {
@@ -18,7 +17,7 @@ class AccountRepository {
     const now = new Date();
     const saltRounds = 3;
     const password = await bcrypt.hash(info.password, saltRounds);
-    await this.database.transaction(async trx => {
+    await this.database.transaction(async (trx) => {
       const account = await this.database('accounts')
         .insert({
           email: info.email,
@@ -62,21 +61,21 @@ class AccountRepository {
     return profileForAccount(this.database, userId);
   }
 
-    async findByEmail(email) {
-        const account = await this.database('accounts')
-            .select(this.accountColumns)
-            .where({ email })
-            .first();
+  async findByEmail(email) {
+    const account = await this.database('accounts')
+      .select(this.accountColumns)
+      .where({ email })
+      .first();
 
-        if (account) {
-            return {
-                ...account,
-                profile: await profileForAccount(this.database, account.userId),
-            };
-        }
-
-        return null;
+    if (account) {
+      return {
+        ...account,
+        profile: await profileForAccount(this.database, account.userId),
+      };
     }
+
+    return null;
+  }
 }
 
 export default AccountRepository;

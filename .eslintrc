@@ -27,13 +27,11 @@
     "no-eq-null": 0,
     "sort-keys": 0,
 
-    "//1": "allow underscores",
     "func-style": 0,
     "import/exports-last": 0,
     "import/no-namespace": 0,
     "no-use-before-define": 0,
 
-    "//2": "disables for prettier",
     "babel/object-curly-spacing": 0,
     "no-await-in-loop": "off",
     "class-methods-use-this": "off"
