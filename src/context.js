@@ -21,6 +21,7 @@ const createContext = async () => {
   return {
     secrets: {
       db: dbSecrets,
+      jwt: jwtSecret,
     },
     repositories: {
       account: accountRepository,

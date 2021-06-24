@@ -37,7 +37,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): AuthenticationInfo
   }
   extend type Query {
-    allAccounts: [Account]!
+    allAccounts: [Account]! @authenticated
   }
 `;
 
